@@ -1,5 +1,7 @@
 package com.carrots.springbootdemo.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class ProjectController {
 	@Autowired
 	private ValidationMapService mapValidationService;
 	
-	@PostMapping("")
+	@PostMapping("/create")
 	public ResponseEntity<?> createProject(@Valid @RequestBody Project project,
 													BindingResult result){
 		
@@ -38,12 +40,21 @@ public class ProjectController {
 		return new ResponseEntity<Project>(project, HttpStatus.CREATED); 
 	}
 	
-	@GetMapping("")
+	@GetMapping("/get")
 	public ResponseEntity<?> getProjectById(@RequestParam("projectId") String projectId){
 		
 		Project project = projectService.findProjectById(projectId);
 		
 		return new ResponseEntity<Project>(project, HttpStatus.OK);
+		
+	}
+	
+	@GetMapping("/all")
+	public ResponseEntity<?> getAllProjects(){
+		
+		List<Project> projects = projectService.findAllProjects();
+		
+		return new ResponseEntity<List<Project>>(projects, HttpStatus.OK);
 		
 	}
 	

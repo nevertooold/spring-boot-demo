@@ -1,5 +1,7 @@
 package com.carrots.springbootdemo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,18 @@ public class ProjectService {
 		}
 		
 		return project;
+		
+	}
+
+	public List<Project> findAllProjects() {
+		
+		List<Project> projects = projectRepository.findAll();
+		
+		if(projects.size() == 0) {
+			System.out.println("No projects found");
+		}
+		
+		return projects;
 		
 	}
 	
